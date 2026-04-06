@@ -1,4 +1,4 @@
-<img width="2048" height="860" alt="image" src="https://github.com/user-attachments/assets/50332569-baf4-473e-a783-34fafa45d84e" />
+
 
 # Instago
 
@@ -14,7 +14,7 @@ It is not an official product, has no relationship with Meta, and is not affilia
 go get github.com/felipeinf/instago
 ```
 
-The module path is `github.com/felipeinf/instago`, but the **Go package name is `ig`**, so you call `ig.NewClient()`, `ig.User`, and other exported API with the `ig` prefix (no import alias needed).
+The module path is `github.com/felipeinf/instago`, but the **Go package name is `ig`**. Use an import alias so calls stay readable, for example `import ig "github.com/felipeinf/instago"` and then `ig.NewClient()`.
 
 ## Quick start
 
@@ -83,6 +83,19 @@ func main() {
 ```
 
 The second argument to `UserInfoByUsername` enables the in-memory user cache; use `false` if you need a fresh fetch.
+
+## Documentation
+
+The SDK reference is godoc in the repository. The **package overview** in [`doc.go`](doc.go) lists the API in business order (login → session → users → media → reels → stories → direct → comments → friendship → search → low-level), including defaults for inbox/thread pagination and comment cursors; pkg.go.dev’s symbol index stays alphabetical by name.
+
+Types (`User`, `Media`, `Settings`, …) live together in [`types.go`](types.go). `Client` methods and subpackages (`config`, `encoding`, `password`, `igerrors`) stay next to their implementations.
+
+```bash
+go doc github.com/felipeinf/instago
+go doc -all github.com/felipeinf/instago
+```
+
+For a local browser view, install [pkgsite](https://pkg.go.dev/golang.org/x/pkgsite/cmd/pkgsite) and run it from this module root.
 
 ## License
 
