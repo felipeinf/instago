@@ -8,6 +8,8 @@ It is not an official product, has no relationship with Meta, and is not affilia
 
 **About this project.** instago is an independent library built for fun and as a personal technical challenge. It was **not created with commercial use in mind** and is not a commercial product, is not offered for sale, and is not intended as a substitute for any official Instagram tooling.
 
+**Keywords:** golang, go, instagram, instagram-api, unofficial, sdk, graphql, api-client, social-media, http-client, meta-api.
+
 ## Install
 
 ```bash
