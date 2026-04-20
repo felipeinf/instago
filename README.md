@@ -1,7 +1,9 @@
 <div align="center">
   <img src="img/instago-img-0.svg" alt="Instago" width="560" />
   <br /><br />
-  <a href="https://pkg.go.dev/github.com/felipeinf/instago"><img src="https://pkg.go.dev/badge/github.com/felipeinf/instago.svg" alt="Go Reference" /></a>
+  <a href="https://pkg.go.dev/github.com/felipeinf/instago"><img src="https://img.shields.io/badge/pkg.go.dev-package-00ADD8?logo=go&logoColor=white" alt="pkg.go.dev module" /></a>
+  &nbsp;
+  <a href="https://github.com/felipeinf/instago/releases"><img src="https://img.shields.io/github/v/tag/felipeinf/instago?sort=semver&label=version" alt="latest semver tag" /></a>
 </div>
 
 # Instago
