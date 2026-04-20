@@ -1,5 +1,3 @@
-
-
 # Instago
 
 Instago is a unofficial Go SDK for develop on Instagram.
@@ -8,96 +6,48 @@ It is not an official product, has no relationship with Meta, and is not affilia
 
 **About this project.** instago is an independent library built for fun and as a personal technical challenge. It was **not created with commercial use in mind** and is not a commercial product, is not offered for sale, and is not intended as a substitute for any official Instagram tooling.
 
-**Keywords:** golang, go, instagram, instagram-api, unofficial, sdk, graphql, api-client, social-media, http-client, meta-api.
-
 ## Install
 
 ```bash
 go get github.com/felipeinf/instago
 ```
 
-The module path is `github.com/felipeinf/instago`, but the **Go package name is `ig`**. Use an import alias so calls stay readable, for example `import ig "github.com/felipeinf/instago"` and then `ig.NewClient()`.
-
-## Quick start
-
-### Login
-
-Create a client, call `Login` with your username and password. If you do not use two-factor authentication, pass an empty string as the third argument.
-
-```go
-package main
-
-import (
-	"fmt"
-	"log"
-
-	"github.com/felipeinf/instago"
-)
-
-func main() {
-	c := ig.NewClient()
-	if err := c.Login("your_username", "your_password", ""); err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("logged in")
-	if err := c.DumpSettings("user.json"); err != nil {
-		log.Fatal(err)
-	}
-}
-```
-
-If Instagram requires 2FA, pass the app/SMS code as the third argument.
-
-### Save and restore session
-
-The path is entirely up to you; `user.json` is only an example (often the process working directory). The login example above already saves to that path; you can also load an existing file before calling API methods:
-
-```go
-c2 := ig.NewClient()
-_ = c2.LoadSettings("user.json", false)
-```
-
-### Look up a profile by username
-
-Using a session file from a previous `Login` + `DumpSettings` (or any file you manage yourself):
-
-```go
-package main
-
-import (
-	"fmt"
-	"log"
-
-	"github.com/felipeinf/instago"
-)
-
-func main() {
-	c := ig.NewClient()
-	if err := c.LoadSettings("user.json", false); err != nil {
-		log.Fatal(err)
-	}
-	u, err := c.UserInfoByUsername("google", true)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(u.Username, u.FullName, u.FollowerCount)
-}
-```
-
-The second argument to `UserInfoByUsername` enables the in-memory user cache; use `false` if you need a fresh fetch.
+The module path is `github.com/felipeinf/instago`, but the **Go package name is `ig`**. Example: `import ig "github.com/felipeinf/instago"` and `ig.NewClient()`.
 
 ## Documentation
 
-The SDK reference is godoc in the repository. The **package overview** in [`doc.go`](doc.go) lists the API in business order (login → session → users → media → reels → stories → direct → comments → friendship → search → low-level), including defaults for inbox/thread pagination and comment cursors; pkg.go.dev’s symbol index stays alphabetical by name.
+- **[docs/](docs/README.md)** — API overview, minimal examples, and type list (easy to browse on GitHub).
+- **[pkg.go.dev](https://pkg.go.dev/github.com/felipeinf/instago)** — full reference and package overview (`doc.go`).
 
-Types (`User`, `Media`, `Settings`, …) live together in [`types.go`](types.go). `Client` methods and subpackages (`config`, `encoding`, `password`, `igerrors`) stay next to their implementations.
+## Quick start
 
-```bash
-go doc github.com/felipeinf/instago
-go doc -all github.com/felipeinf/instago
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/felipeinf/instago"
+)
+
+func main() {
+	c := ig.NewClient()
+	if err := c.Login("username", "password", ""); err != nil {
+		log.Fatal(err)
+	}
+	if err := c.DumpSettings("session.json"); err != nil {
+		log.Fatal(err)
+	}
+	me, err := c.AccountInfo()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("logged in as", me.Username)
+}
 ```
 
-For a local browser view, install [pkgsite](https://pkg.go.dev/golang.org/x/pkgsite/cmd/pkgsite) and run it from this module root.
+Use `LoadSettings("session.json", false)` instead of `Login` when you already have a saved session. More patterns: [docs/api.md](docs/api.md).
 
 ## License
 
