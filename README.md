@@ -1,3 +1,9 @@
+<div align="center">
+  <img src="img/instago-img-0.svg" alt="Instago" width="560" />
+  <br /><br />
+  <a href="https://pkg.go.dev/github.com/felipeinf/instago"><img src="https://pkg.go.dev/badge/github.com/felipeinf/instago.svg" alt="Go Reference" /></a>
+</div>
+
 # Instago
 
 Instago is a unofficial Go SDK for develop on Instagram.
